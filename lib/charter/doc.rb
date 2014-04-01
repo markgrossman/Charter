@@ -7,7 +7,7 @@ class Doc
 	end
 
 	def create(name)
-		template = File.read('lib/charter/charter_template.md')
+		template = File.read(File.dirname(__FILE__) + '/charter_template.md')
 		charter = File.new("#{@config['session_folder']}/#{name[0]}.md", "w+")
 		charter.write(template)
 		charter.close
