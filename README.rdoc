@@ -1,0 +1,6 @@
+= session
+
+Describe your project here
+
+:include:session.rdoc
+
