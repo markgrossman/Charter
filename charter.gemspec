@@ -7,7 +7,9 @@ spec = Gem::Specification.new do |s|
   s.email = 'mark@testwith.me'
   s.homepage = 'http://testwith.me'
   s.platform = Gem::Platform::RUBY
-  s.summary = 'A CLI for creating a session based testing charter'
+  s.summary = 'A command line tool for creating a session based testing charter'
+  s.description = 'A tool for creating exploratory test session charters'
+  s.license = 'MIT'
   s.files = %w(
     bin/charter
     lib/charter/version.rb
@@ -17,12 +19,13 @@ spec = Gem::Specification.new do |s|
     )
   s.require_paths << 'lib'
   s.has_rdoc = true
-  s.rdoc_options << '--title' << 'charter' << '--main' << 'README.rdoc' << '-ri'
+  s.extra_rdoc_files = ['README.md']
+  s.rdoc_options << '--title' << 'charter' << '--main' << 'README.md' << '--markup' << 'markdown'
   s.bindir = 'bin'
   s.executables << 'charter'
-  s.add_development_dependency('rake')
-  s.add_development_dependency('rdoc')
-  s.add_development_dependency('aruba')
+  s.add_development_dependency 'rake', '~> 0'
+  s.add_development_dependency 'rdoc', '~> 0'
+  s.add_development_dependency 'aruba', '~> 0'
   s.add_runtime_dependency('gli','2.9.0')
-  s.add_runtime_dependency('redcarpet','>= 3.1.1')
+  s.add_runtime_dependency 'redcarpet', '~> 3.1', '>= 3.1.1'
 end
