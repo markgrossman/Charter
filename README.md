@@ -1,4 +1,4 @@
-Session
+Charter
 =======
 
 Command line interface for creating a test charter exported in markdown.
