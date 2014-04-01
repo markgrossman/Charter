@@ -1,9 +1,7 @@
 #Exploratory Testing Charter
----
 <purpose>
 
 ##Environment
----
 <environment>
 
 ##Length
@@ -13,14 +11,10 @@ End Time: <end_time>
 ##Tester
 <tester>
 
-##Test Notes
----
-<test_notes>
-
 ##Scenarios:
 <scenarios>
 
-##Defects Found
+##Defects Found:
 <defects>
 
 

@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 require 'gli'
 begin # XXX: Remove this begin/rescue before distributing your app
-require 'session'
+require 'charter'
 rescue LoadError
-  STDERR.puts "In development, you need to use `bundle exec bin/session` to run your app"
+  STDERR.puts "In development, you need to use `bundle exec bin/charter` to run your app"
   STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"
   STDERR.puts "Feel free to remove this message from bin/session now"
   exit 64
@@ -11,18 +11,17 @@ end
 
 include GLI::App
 
-charter = Charter.new
+doc = Doc.new
 
 program_desc 'A command line tool for session based testing'
 
-version Session::VERSION
+version Charter::VERSION
 
 desc 'Starts a new session charter'
 arg_name 'SessionName'
 command :start do |c|
   c.action do |global_options,options,args|
-    puts "start command ran"
-    charter.create(args)
+    doc.create(args)
   end
 end
 
@@ -30,7 +29,7 @@ desc 'What are you testing'
 arg_name 'What is the purpose of this session'
 command :purpose, :p do |c|
   c.action do |global_options,options,args|
-    charter.purpose(args[0])
+    doc.purpose(args[0])
   end
 end
 
@@ -38,7 +37,7 @@ desc 'Describe environment here'
 arg_name 'List your environment'
 command :env do |c|
   c.action do |global_options,options,args|
-    charter.env(args[0])
+    doc.env(args[0])
   end
 end
 
@@ -46,7 +45,7 @@ desc 'Add a bug found during testing'
 arg_name 'Add a bug to the current session'
 command :bug do |c|
   c.action do |global_options,options,args|
-    charter.bug(args[0])
+    doc.bug(args[0])
   end
 end
 
@@ -54,7 +53,7 @@ desc 'Describe a scenario here'
 arg_name 'Add a scenario to the current session'
 command :scenario, :s do |c|
   c.action do |global_options,options,args|
-    charter.scenario(args[0])
+    doc.scenario(args[0])
   end
 end
 
@@ -63,7 +62,7 @@ arg_name 'Type of export'
 command :finish do |c|
   c.action do |global_options,options,args|
     c.flag :e
-    charter.finish
+    doc.finish
   end
 end
 

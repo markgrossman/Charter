@@ -1,22 +1,21 @@
 #!/usr/bin/ruby
 
-class Charter
+class Doc
 
 	def initialize(input=nil)
 		@config = read_config
 	end
 
 	def create(name)
-		template = File.read('lib/session/charter_template.md')
+		template = File.read('lib/charter/charter_template.md')
 		charter = File.new("#{@config['session_folder']}/#{name[0]}.md", "w+")
 		charter.write(template)
 		charter.close
 		
+		@config['current_session'] = "#{@config['session_folder']}/#{name[0]}.md"
+		
 		replace_text('<start_time>', Time.now.strftime("%m/%d/%Y %H:%M") + "  \r\n")		
 		replace_text('<tester>', @config['tester'])
-
-		location = "#{@config['session_folder']}/#{name[0]}.md"
-		@config['current_session'] = location
 
 		write_config
 	end

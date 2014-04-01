@@ -1,5 +1,0 @@
-= session
-
-Generate this with
-    session rdoc
-After you have described your command line interface
