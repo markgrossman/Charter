@@ -23,9 +23,9 @@ spec = Gem::Specification.new do |s|
   s.rdoc_options << '--title' << 'charter' << '--main' << 'README.md' << '--markup' << 'markdown'
   s.bindir = 'bin'
   s.executables << 'charter'
-  s.add_development_dependency 'rake', '~> 0'
-  s.add_development_dependency 'rdoc', '~> 0'
-  s.add_development_dependency 'aruba', '~> 0'
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'rdoc'
+  s.add_development_dependency 'aruba'
   s.add_runtime_dependency('gli','2.9.0')
   s.add_runtime_dependency 'redcarpet', '~> 3.1', '>= 3.1.1'
 end

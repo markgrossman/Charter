@@ -6,7 +6,8 @@
 
 ##Length
 Start Time: <start_time>
-End Time: <end_time>
+End Time: <end_time>  
+Elapsed: <elapsed>
 
 ##Tester
 <tester>
@@ -16,7 +17,3 @@ End Time: <end_time>
 
 ##Defects Found:
 <defects>
-
-
-
-
