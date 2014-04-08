@@ -1,4 +1,4 @@
-#Exploratory Testing Charter
+#Test Charter
 <purpose>
 
 ##Environment
@@ -6,7 +6,7 @@
 
 ##Length
 Start Time: <start_time>
-End Time: <end_time>  
+End Time: <end_time>
 Elapsed: <elapsed>
 
 ##Tester
@@ -17,3 +17,6 @@ Elapsed: <elapsed>
 
 ##Defects Found:
 <defects>
+
+##Notes:
+<notes>

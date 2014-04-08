@@ -14,7 +14,7 @@ desc 'Starts a new session charter'
 arg_name 'SessionName'
 command :start do |c|
   c.action do |global_options,options,args|
-    doc.create_charter(args)
+    doc.create_charter(args * " ")
   end
 end
 
@@ -22,7 +22,7 @@ desc 'What are you testing'
 arg_name 'What is the purpose of this session'
 command :purpose, :p do |c|
   c.action do |global_options,options,args|
-    doc.set_purpose(args[0])
+    doc.set_purpose(args * " ")
   end
 end
 
@@ -30,7 +30,7 @@ desc 'Add an item to describe system under test'
 arg_name 'List your environment'
 command :env do |c|
   c.action do |global_options,options,args|
-    doc.set_env(args[0])
+    doc.set_env(args * " ")
   end
 end
 
@@ -39,7 +39,7 @@ arg_name 'Add a bug to the current session'
 command :bug do |c|
   c.switch :s
   c.action do |global_options,options,args|
-    doc.add_bug(args[0], options[:s])
+    doc.add_bug(args * " ", options[:s])
   end
 end
 
@@ -47,7 +47,15 @@ desc 'Describe a scenario here'
 arg_name 'Add a scenario to the current session'
 command :scenario, :s do |c|
   c.action do |global_options,options,args|
-    doc.add_scenario(args[0])
+    doc.add_scenario(args * " ")
+  end
+end
+
+desc 'Add a note'
+arg_name 'Add a note to the current session'
+command :note, :n do |c|
+  c.action do |global_options,options,args|
+    doc.add_note(args * " ")
   end
 end
 
@@ -58,7 +66,7 @@ command :finish do |c|
   c.action do |global_options,options,args|
     doc.finish_charter
     if options[:e]
-      doc.export("finalCharter")
+      doc.export_charter
     end
   end
 end
