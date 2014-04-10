@@ -59,6 +59,24 @@ command :note, :n do |c|
   end
 end
 
+desc 'Add a tag to your charter'
+arg_name 'tag'
+command :tag do |c|
+  c.action do |global_options,options,args|
+    args.each do |tag|
+      doc.add_tag(tag)
+    end
+  end
+end
+
+desc 'Find charters with tag'
+arg_name 'find'
+command :find do |c|
+  c.action do |global_options,options,args|
+    doc.find_files_with_tags(args * " ")
+  end
+end
+
 desc 'Final formatting to charter'
 arg_name 'Type of export'
 command :finish do |c|

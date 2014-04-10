@@ -55,6 +55,10 @@ class Doc
 		write_config
 	end
 
+	def add_tag(text)
+		replace_text('<tags>', "@#{text} <tags>")
+	end
+
 	def finish_charter
 		set_default_text
 		
@@ -70,6 +74,13 @@ class Doc
 		html_file = File.new("#{@config['session_folder']}/#{@config['session_name'].gsub(" ", "-")}.html", "w+")
 		html_text = markdown.render(text)
 		html_file.write(html_text)
+	end
+
+	def find_files_with_tags(tag)
+		files = %x(grep -rnw -l #{@config['session_folder']} -e '@#{tag}').split("\n")
+		files.each do |file|
+			puts file.split('/')[-1]
+		end
 	end
 
 private

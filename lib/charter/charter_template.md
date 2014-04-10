@@ -20,3 +20,6 @@ Elapsed: <elapsed>
 
 ##Notes:
 <notes>
+
+###Tags:
+<tags>
