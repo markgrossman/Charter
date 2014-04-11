@@ -70,14 +70,14 @@ class Doc
 	def export_charter
 		renderer = Redcarpet::Render::HTML.new(render_options = {})
 		markdown = Redcarpet::Markdown.new(renderer, extensions = {})
-		text = File.read(@config['current_session'])
+		markdown_text = File.read(@config['current_session'])
 		html_file = File.new("#{@config['session_folder']}/#{@config['session_name'].gsub(" ", "-")}.html", "w+")
-		html_text = markdown.render(text)
+		html_text = markdown.render(markdown_text)
 		html_file.write(html_text)
 	end
 
 	def find_files_with_tags(tag)
-		files = %x(grep -rnw -l #{@config['session_folder']} -e '@#{tag}').split("\n")
+		files = %x(grep -rnw -l --include=*.md #{@config['session_folder']} -e '@#{tag}').split("\n")
 		files.each do |file|
 			puts file.split('/')[-1]
 		end
@@ -85,10 +85,10 @@ class Doc
 
 private
 	def replace_text(find,replace)
-		aString = File.read(@config['current_session'])
-		aString.gsub!(find, replace)
+		file_text = File.read(@config['current_session'])
+		file_text.gsub!(find, replace)
 		file = File.open(@config['current_session'], "w")
-		file.puts aString
+		file.puts file_text
 		file.close
 	end
 
@@ -111,10 +111,10 @@ private
 	end
 
 	def remove_placeholders
-		aString = File.read(@config['current_session'])
-		aString.gsub!(/\<(.*?)\>/, "")
+		file_text = File.read(@config['current_session'])
+		file_text.gsub!(/\<(.*?)\>/, "")
 		file = File.open(@config['current_session'], "w")
-		file.puts aString
+		file.puts file_text
 		file.close
 	end
 
