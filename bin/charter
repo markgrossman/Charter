@@ -13,24 +13,24 @@ version Charter::VERSION
 desc 'Starts a new session charter'
 arg_name 'SessionName'
 command :start do |c|
-  c.action do |global_options,options,args|
-    doc.create_charter(args * " ")
+  c.action do |global_options, options, args|
+    doc.create_charter(args * ' ')
   end
 end
 
 desc 'What are you testing'
-arg_name 'What is the purpose of this session'
+arg_name 'purpose'
 command :purpose, :p do |c|
-  c.action do |global_options,options,args|
-    doc.set_purpose(args * " ")
+  c.action do |global_options, options, args|
+    doc.set_purpose(args * ' ')
   end
 end
 
 desc 'Add an item to describe system under test'
 arg_name 'List your environment'
 command :env do |c|
-  c.action do |global_options,options,args|
-    doc.set_env(args * " ")
+  c.action do |global_options, options, args|
+    doc.set_env(args * ' ')
   end
 end
 
@@ -38,31 +38,31 @@ desc 'Add a bug found during testing'
 arg_name 'Add a bug to the current session'
 command :bug do |c|
   c.switch :s
-  c.action do |global_options,options,args|
-    doc.add_bug(args * " ", options[:s])
+  c.action do |global_options, options, args|
+    doc.add_bug(args * ' ', options[:s])
   end
 end
 
 desc 'Describe a scenario here'
 arg_name 'Add a scenario to the current session'
 command :scenario, :s do |c|
-  c.action do |global_options,options,args|
-    doc.add_scenario(args * " ")
+  c.action do |global_options, options, args|
+    doc.add_scenario(args * ' ')
   end
 end
 
 desc 'Add a note'
 arg_name 'Add a note to the current session'
 command :note, :n do |c|
-  c.action do |global_options,options,args|
-    doc.add_note(args * " ")
+  c.action do |global_options, options, args|
+    doc.add_note(args * ' ')
   end
 end
 
 desc 'Add a tag to your charter'
 arg_name 'tag'
 command :tag do |c|
-  c.action do |global_options,options,args|
+  c.action do |global_options, options, args|
     args.each do |tag|
       doc.add_tag(tag)
     end
@@ -72,8 +72,16 @@ end
 desc 'Find charters with tag'
 arg_name 'find'
 command :find do |c|
-  c.action do |global_options,options,args|
-    doc.find_files_with_tags(args * " ")
+  c.action do |global_options, options, args|
+    doc.find_files_with_tags(args * ' ')
+  end
+end
+
+desc 'Show all charters'
+arg_name 'all'
+command :all do |c|
+  c.action do |global_options, options, args|
+    doc.show_all_charters
   end
 end
 
@@ -81,15 +89,14 @@ desc 'Final formatting to charter'
 arg_name 'Type of export'
 command :finish do |c|
   c.switch :e
-  c.action do |global_options,options,args|
+  c.action do |global_options, options, args|
     doc.finish_charter
-    if options[:e]
-      doc.export_charter
-    end
+    doc.export_charter if options[:e]
+      
   end
 end
 
-pre do |global,command,options,args|
+pre do |global, command, options, args|
   # Pre logic here
   # Return true to proceed; false to abort and not call the
   # chosen command
@@ -98,7 +105,7 @@ pre do |global,command,options,args|
   true
 end
 
-post do |global,command,options,args|
+post do |global, command, options, args|
   # Post logic here
   # Use skips_post before a command to skip this
   # block on that command only
