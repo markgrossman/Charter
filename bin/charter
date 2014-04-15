@@ -39,7 +39,8 @@ arg_name 'Add a bug to the current session'
 command :bug do |c|
   c.switch :s
   c.action do |global_options, options, args|
-    doc.add_bug(args * ' ', options[:s])
+    doc.add_bug(args * ' ')
+    doc.take_screenshot(args * ' ') if options[:s]
   end
 end
 

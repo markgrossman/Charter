@@ -25,14 +25,15 @@ class Doc
     write_config
   end
 
-  def add_bug(text, screenshot)
+  def add_bug(text)
     replace_text('<defects>', "1. #{text}  \r\n<defects>")
     @config['defects'] = 'true'
-    if screenshot
-      %x(screencapture -s "#{@config['session_folder']}/#{text}".jpg)
-      replace_text('<defects>', "    * ![Alt text](#{@config['session_folder']}/#{text}.jpg)  \r\n<defects>")
-    end
     write_config
+  end
+
+  def take_screenshot(text)
+    %x(screencapture -s "#{@config['session_folder']}/#{text}".jpg)
+    replace_text('<defects>', "    * ![Alt text](#{@config['session_folder']}/#{text}.jpg)  \r\n<defects>")
   end
 
   def add_scenario(text)
