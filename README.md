@@ -3,11 +3,11 @@
   <code>[sudo] gem install charter</code>
  	
 After installing the gem, create a ~/.charterrc file and add the following:
-	{% codeblock lang:yaml %}
-		---
-		session_folder: "/Where/The/Charters/Will/Save/To"
-		tester: Your Name Here
-	{% endcodeblock %}
+```
+    ---
+    session_folder: "/Where/The/Charters/Will/Save/To"
+    tester: Your Name Here
+```
 ##Usage
 	charter [global options] command [command options] [arguments...]
 
