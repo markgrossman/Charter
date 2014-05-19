@@ -7,11 +7,8 @@ class Doc
   end
 
   def create_charter(name)
-    template = File.read(File.dirname(__FILE__) + '/charter_template.md')
-    charter = File.new("#{@config['session_folder']}/#{name}.md", 'w+')
-    charter.write(template)
-    charter.close
-
+    write_template(name)  
+    
     @config['session_name'] = name
     @config['current_session'] = "#{@config['session_folder']}/#{name}.md"
     @config['start_time'] = Time.now.strftime('%l:%M %P')
@@ -23,6 +20,13 @@ class Doc
     replace_text('<tester>', @config['tester'])
 
     write_config
+  end
+
+  def write_template(name)
+    template = File.read(File.dirname(__FILE__) + '/charter_template.md')
+    charter = File.new("#{@config['session_folder']}/#{name}.md", 'w+')
+    charter.write(template)
+    charter.close
   end
 
   def add_bug(text)
