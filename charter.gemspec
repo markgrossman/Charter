@@ -16,6 +16,7 @@ spec = Gem::Specification.new do |s|
     lib/charter.rb
     lib/charter/doc.rb
     lib/charter/charter_template.md
+    lib/charter/ConfigStore.rb
     )
   s.require_paths << 'lib'
   s.has_rdoc = true

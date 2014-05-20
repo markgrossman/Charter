@@ -38,7 +38,7 @@ class Doc
   end
 
   def take_screenshot(text)
-    if Gem.win_platform?
+    if !Gem.win_platform?
       %x(screencapture -s "#{@config['session_folder']}/#{text}".jpg)
       replace_text('<defects>', "    * ![Alt text](#{@config['session_folder']}/#{text}.jpg)  \r\n<defects>")
     else
