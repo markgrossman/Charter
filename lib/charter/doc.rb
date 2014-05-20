@@ -1,14 +1,16 @@
 #!/usr/bin/ruby
+require "pstore"
+require_relative "ConfigStore"
 
 class Doc
 
   def initialize(input = nil)
+    @store = ConfigStore.new
     @config = read_config
   end
 
   def create_charter(name)
     write_template(name)  
-    
     @config['session_name'] = name
     @config['current_session'] = "#{@config['session_folder']}/#{name}.md"
     @config['start_time'] = Time.now.strftime('%l:%M %P')
@@ -36,8 +38,12 @@ class Doc
   end
 
   def take_screenshot(text)
-    %x(screencapture -s "#{@config['session_folder']}/#{text}".jpg)
-    replace_text('<defects>', "    * ![Alt text](#{@config['session_folder']}/#{text}.jpg)  \r\n<defects>")
+    if Gem.win_platform?
+      %x(screencapture -s "#{@config['session_folder']}/#{text}".jpg)
+      replace_text('<defects>', "    * ![Alt text](#{@config['session_folder']}/#{text}.jpg)  \r\n<defects>")
+    else
+      puts "This isn't supported on you operating system"
+    end
   end
 
   def add_scenario(text)
@@ -70,15 +76,6 @@ class Doc
     set_end_time
 
     remove_placeholders
-  end
-
-  def export_charter
-    renderer = Redcarpet::Render::HTML.new(render_options = {})
-    markdown = Redcarpet::Markdown.new(renderer, extensions = {})
-    markdown_text = File.read(@config['current_session'])
-    html_file = File.new("#{@config['session_folder']}/#{@config['session_name'].gsub(' ', '-')}.html", 'w+')
-    html_text = markdown.render(markdown_text)
-    html_file.write(html_text)
   end
 
   def find_files_with_tags(tag)
@@ -132,14 +129,10 @@ class Doc
   end
 
   def read_config
-    if File.exist? File.expand_path(SESSION_CONFIG)
-      return YAML.load_file(File.expand_path(SESSION_CONFIG))
-    else
-      return {}
-    end
+    @store.read('config')
   end
 
   def write_config
-    File.open(File.expand_path(SESSION_CONFIG), 'w') { |yf| YAML.dump(@config, yf) }
+    @store.write('config',@config)
   end
 end
