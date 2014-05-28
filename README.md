@@ -2,12 +2,7 @@
  Charter was created as a Ruby gem and is available through Rubygems.org. Installation is as simple as:  
   <code>[sudo] gem install charter</code>
  	
-After installing the gem, create a ~/.charterrc file and add the following:
-```
-    ---
-    session_folder: "/Where/The/Charters/Will/Save/To"
-    tester: Your Name Here
-```
+After installing the gem, run <code>charter config</code> to set charter up
 ##Usage
 	charter [global options] command [command options] [arguments...]
 
@@ -19,7 +14,7 @@ Creating a new charter is as easy as <code>charter start "My charter title here"
 <code>charter bug "This is my bug"</code> or <code>charter bug -s "My bug"</code> : Add a bug with or without a screenshot  
 <code>charter note</code> : Add a note  
 <code>charter tag "Login"</code> : Add a tag to the charter  
-<code>charter finish</code> or <code>charter finish -e</code> : Remove any remaining placeholders and optionally export the charter in HTML  
+<code>charter finish</code> Remove any remaining placeholders
 <code>charter find Login</code> : Find all charters with a given tag
 
 See an example charter [here](http://testwith.me/charter-example/)
