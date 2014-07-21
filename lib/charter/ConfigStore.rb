@@ -2,7 +2,8 @@ require 'yaml/store'
 
 class ConfigStore
 	def initialize(input = nil)
-	    @store = YAML::Store.new("config.yml")
+		Dir.chdir Dir.home
+	    @store = YAML::Store.new("charter_config.yml")
 	end
 
 	def write(key,value)

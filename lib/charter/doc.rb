@@ -80,8 +80,9 @@ class Doc
 
   def find_files_with_tags(tag)
     files = %x(grep -rnw -l --include=*.md #{@config['session_folder']} -e '@#{tag}').split('\n')
+    puts "No charters with that tag" unless files.length > 0
     files.each do |file|
-      puts file.split('/')[-1]
+      puts file.split('/')
     end
   end
 
