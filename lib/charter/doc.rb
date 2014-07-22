@@ -1,16 +1,15 @@
 #!/usr/bin/ruby
-require "pstore"
-require_relative "ConfigStore"
+require 'pstore'
+require_relative 'ConfigStore'
 
 class Doc
-
   def initialize(input = nil)
     @store = ConfigStore.new
     @config = read_config
   end
 
   def create_charter(name)
-    write_template(name)  
+    write_template(name)
     @config['session_name'] = name
     @config['current_session'] = "#{@config['session_folder']}/#{name}.md"
     @config['start_time'] = Time.now.strftime('%l:%M %P')
@@ -79,17 +78,19 @@ class Doc
   end
 
   def find_files_with_tags(tag)
-    files = %x(grep -rnw -l --include=*.md #{@config['session_folder']} -e '@#{tag}').split('\n')
-    puts "No charters with that tag" unless files.length > 0
-    files.each do |file|
-      puts file.split('/')
-    end
+    found_files = false
+    Dir.glob("#{@config['session_folder']}/**/*.md") {|file|
+      if File.read(file).include?("@#{tag}")
+        found_files = true
+        puts file.split('/').last(2).join('/')
+      end
+    }
+    puts "No Charters with that tag" unless found_files
   end
 
   def show_all_charters
-    files = Dir["#{@config['session_folder']}/*.md"]
-    files.each do |file|
-      puts file.split('/')[-1]
+    Dir.glob("#{@config['session_folder']}/**/*.md") do|file|
+      puts file.split('/').last(2).join('/')
     end
   end
 
@@ -134,6 +135,6 @@ class Doc
   end
 
   def write_config
-    @store.write('config',@config)
+    @store.write('config', @config)
   end
 end
